@@ -9,7 +9,9 @@ var requireFromString = require('require-from-string', '', [
 	//__dirname
 	"/Users/javier/git/wrapkend-shared-worker"
 ]);
-var socket = require('socket.io-client')('http://localhost:3002/wrapkend-rJqGIp_hf', {
+let uri =process.env.SOCKET_ENDPOINT||'http://localhost:3002/wrapkend-rJqGIp_hf';
+console.log('Socket targeting uri',uri)
+var socket = require('socket.io-client')(uri, {
 	//timeout:1000*999999
 	autoConnect: false
 });

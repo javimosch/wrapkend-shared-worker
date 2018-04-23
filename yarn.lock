@@ -240,6 +240,10 @@ mongodb-core@3.0.6:
     bson "~1.0.4"
     require_optional "^1.0.1"
 
+mongodb-uri@^0.9.7:
+  version "0.9.7"
+  resolved "https://registry.yarnpkg.com/mongodb-uri/-/mongodb-uri-0.9.7.tgz#0f771ad16f483ae65f4287969428e9fbc4aa6181"
+
 mongodb@3.0.6:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.0.6.tgz#72d2444b14f9784869e0c33436c49c8dca5083e4"

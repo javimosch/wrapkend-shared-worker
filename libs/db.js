@@ -9,7 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
 	mongoose.set('debug', true);
 }
 
-const URI = '';
+var URI = '';
 
 var self = module.exports = {
 	connections: {},
@@ -54,7 +54,8 @@ function connectMongoose(options = {}) {
 				throw new Error('INVALID_DB_URI')
 			}
 
-			var conn = mongoose.createConnection(uri, {
+			//createConnection
+			var conn = mongoose.connect(uri, {
 				server: {
 					// sets how many times to try reconnecting
 					reconnectTries: Number.MAX_VALUE,
@@ -62,12 +63,13 @@ function connectMongoose(options = {}) {
 					reconnectInterval: 1000
 				}
 			});
+			conn = mongoose.connection;
 
 			if (!models) {
 				throw new Error('MONGOOSE_MODELS_MISSING')
 			} else {
 				models.forEach(m => {
-					conn.model(m.name, m.schema);
+					mongoose.model(m.name, m.schema);
 				})
 			}
 

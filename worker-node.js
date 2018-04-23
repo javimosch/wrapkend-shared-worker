@@ -81,7 +81,9 @@ function createSchemaFromWraCollection(doc) {
 	});
 }
 
+var configured = false;
 socket.on('configure', params => {
+	if(configured) return;
 	try {
 		console.log('CONFIGURE')
 		let mongooseModels = params.models.map(modelDoc => {
@@ -94,6 +96,7 @@ socket.on('configure', params => {
 		db.connect(params.dbURI, mongooseModels).then(() => {
 			console.log('CONNECTING MONGO OK')
 			socket.emit('configured');
+			configured = true;
 		}).catch(err => {
 			console.log('CONNECTING MONGO FAIL')
 			socket.emit('configured_error', errToJSON(err));
@@ -127,7 +130,9 @@ socket.on('exec', function(params) {
 			}, null, 2)))
 		}
 
-		let actionPromise = def.default.apply({}, [actionData])
+		let actionPromise = def.default.apply({
+
+		}, [actionData])
 
 		actionPromise.then(result => {
 			resolve(result);

@@ -1,7 +1,8 @@
 const console = require('tracer').colorConsole();
-import mongoose from 'mongoose';
-import path from 'path';
-import fs from 'fs';
+const mongoose = require('mongoose')
+const path = require('path')
+const fs = require('fs')
+
 var mongodbUri = require('mongodb-uri');
 
 if (process.env.NODE_ENV !== 'production') {

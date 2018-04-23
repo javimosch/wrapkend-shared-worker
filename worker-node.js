@@ -72,6 +72,7 @@ function createSchemaFromWraCollection(doc) {
 		if (f.type === 'Number') res.type = Number
 		if (f.type === 'Date') res.type = Date
 		if (f.type === 'Boolean') res.type = Boolean
+		if (f.type === 'Object') res.type = {}
 		if (f.type === 'Ref') {
 			res.type = mongoose.Schema.Types.ObjectId
 			res.ref = f.ref

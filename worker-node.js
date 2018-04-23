@@ -124,7 +124,7 @@ socket.on('exec', function(params) {
 		var def = '';
 		console.log('EXEC', name, id)
 
-		code = babel.transform(d.code, {
+		code = babel.transform(code, {
 			minified: false,
 			babelrc: false,
 			presets: [

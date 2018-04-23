@@ -1,4 +1,5 @@
 const console = require('tracer').colorConsole();
+const babel = require('babel-core');
 var errToJSON = require('error-to-json')
 var mongoose = require('mongoose')
 var db = require('./libs/db')
@@ -9,8 +10,8 @@ var requireFromString = require('require-from-string', '', [
 	//__dirname
 	"/Users/javier/git/wrapkend-shared-worker"
 ]);
-let uri =process.env.SOCKET_ENDPOINT||'http://localhost:3002/wrapkend-rJqGIp_hf';
-console.log('Socket targeting uri',uri)
+let uri = process.env.SOCKET_ENDPOINT || 'http://localhost:3002/wrapkend-rJqGIp_hf';
+console.log('Socket targeting uri', uri)
 var socket = require('socket.io-client')(uri, {
 	//timeout:1000*999999
 	autoConnect: false
@@ -85,7 +86,7 @@ function createSchemaFromWraCollection(doc) {
 
 var configured = false;
 socket.on('configure', params => {
-	if(configured) return;
+	if (configured) return;
 	try {
 		console.log('CONFIGURE')
 		let mongooseModels = params.models.map(modelDoc => {
@@ -122,6 +123,18 @@ socket.on('exec', function(params) {
 		var code = params.c;
 		var def = '';
 		console.log('EXEC', name, id)
+
+		code = babel.transform(d.code, {
+			minified: false,
+			babelrc: false,
+			presets: [
+				["env", {
+					"targets": {
+						"node": "6.0"
+					}
+				}]
+			]
+		}).code
 
 		try {
 			def = requireFromString(code);

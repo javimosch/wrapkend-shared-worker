@@ -4,6 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "moment": "",
+    "shelljs": "",
     "error-to-json": "^1.1.0",
     "mongoose": "^5.0.15",
     "require-from-string": "^2.0.2",
